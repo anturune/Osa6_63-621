@@ -1,16 +1,15 @@
 import React from 'react'
+//Vote funktio on "anecdoteReducer.js" filessä
+import { voteAnecdote } from './reducers/anecdoteReducer'
 import { useSelector, useDispatch } from 'react-redux'
 
 const App = () => {
   const anecdotes = useSelector(state => state)
   const dispatch = useDispatch()
 
+  //Id syötetään "anecdoteReducer.js" filessä olevalle voteAnecdote funktiolle
   const vote = (id) => {
-    console.log('vote', id)
-    dispatch({
-      type: 'VOTE',
-      data: { id }
-    })
+    dispatch(voteAnecdote(id))
   }
 
   return (
