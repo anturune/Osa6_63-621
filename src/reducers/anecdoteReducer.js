@@ -6,7 +6,7 @@ const anecdotesAtStart = [
   'Premature optimization is the root of all evil.',
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
-
+//
 const getId = () => (100000 * Math.random()).toFixed(0)
 
 const asObject = (anecdote) => {
@@ -20,10 +20,34 @@ const asObject = (anecdote) => {
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
 
-  return state
+  switch (action.type) {
+    case 'VOTE':
+      //id tulee alla olevasta "voteAnecdote" funktiosta
+      const id = action.data.id
+      //Etsitään anecdote id:n perusteella jota votetaan
+      const anecdoteToVote = state.find(n => n.id === id)
+      //Lisätään vote anecdotelle
+      const votedAnecdote = {
+        ...anecdoteToVote,
+        votes: anecdoteToVote.votes + 1
+      }
+      //Palautetaan uusi taulukon tila
+      return state.map(anecdote =>
+        anecdote.id !== id ? anecdote : votedAnecdote
+      )
+    default:
+      return state
+  }
 }
+//Tällä annetaan reducerille ID ja type, jolla määrätään mitä tehdään
+export const voteAnecdote = (id) => {
+  console.log('TULIKO VOTEEN')
+  return {
+    type: 'VOTE',
+    data: { id }
+  }
+}
+
 
 export default reducer
