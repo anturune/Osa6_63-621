@@ -34,10 +34,13 @@ const reducer = (state = initialState, action) => {
         votes: anecdoteToVote.votes + 1
       }
       //Palautetaan uusi taulukon tila
+      //Palautetaan kaikki muut anecdotet sellaisenaan paitsi äänestetty uudella arvolla
+      //Lopuksi sortataan äänien mukaan
       return state.map(anecdote =>
-        anecdote.id !== id ? anecdote : votedAnecdote
-
-      )
+        anecdote.id !== id
+          ? anecdote
+          : votedAnecdote).sort((a, b) => a.votes <= b.votes ? 1 : -1)
+    //Luodaan uusi Anecdote
     case 'NEW_ANECDOTE':
       console.log('TULEEKO UUSI ANECDOTE', action.data)
       return [...state, action.data]

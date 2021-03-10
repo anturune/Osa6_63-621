@@ -3,6 +3,12 @@ import React from 'react'
 import { voteAnecdote, createAnecdote } from './reducers/anecdoteReducer'
 import { useSelector, useDispatch } from 'react-redux'
 
+
+
+
+
+
+
 const App = () => {
   const anecdotes = useSelector(state => state)
   const dispatch = useDispatch()
@@ -20,6 +26,7 @@ const App = () => {
     console.log('MITÄ INPUT KENTTÄÄN TULEE', content)
     dispatch(createAnecdote(content))
   }
+
 
   return (
     <div>
