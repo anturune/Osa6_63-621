@@ -9,6 +9,7 @@ const anecdotesAtStart = [
 //
 const getId = () => (100000 * Math.random()).toFixed(0)
 
+//Tällä luodaan anecdootti olio, jossa id ja votet mukana
 const asObject = (anecdote) => {
   return {
     content: anecdote,
@@ -16,7 +17,7 @@ const asObject = (anecdote) => {
     votes: 0
   }
 }
-
+//Lisätään jokaisell anekdootille oma id ja votesit hyödybtäen asObject funktiota
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
