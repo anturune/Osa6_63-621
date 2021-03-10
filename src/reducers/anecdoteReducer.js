@@ -49,6 +49,7 @@ const reducer = (state = initialState, action) => {
   }
 }
 //Tällä annetaan reducerille ID ja type, jolla määrätään mitä tehdään
+//Action on javascript objekti jolla on type -field.
 export const voteAnecdote = (id) => {
   console.log('TULIKO VOTEEN')
   return {
@@ -59,6 +60,7 @@ export const voteAnecdote = (id) => {
 
 //Tällä Luodaan uusi anecdote ja importataan esim. "App.js" fileen, josta
 //tänne tuodaan anecdoten contentti
+//Action on javascript objekti jolla on type -field.
 export const createAnecdote = (content) => {
   console.log('TULIKO CREATW ANECDOTEEN')
   return {
