@@ -20,7 +20,8 @@ const Anecdote = ({ anecdote, handleClick }) => {
 //Anekdoottien listaus eristetty omaan moduuliin
 const AnecdoteList = () => {
     const dispatch = useDispatch()
-    const anecdotes = useSelector(state => state)
+    //Tähän pitää laittaa "state.anecdotes"
+    const anecdotes = useSelector(state => state.anecdotes)
     return (
         anecdotes.map(anecdote =>
             <Anecdote
