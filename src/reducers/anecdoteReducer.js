@@ -22,6 +22,7 @@ const initialState = anecdotesAtStart.map(asObject)
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
+
     case 'VOTE':
       //id tulee alla olevasta "voteAnecdote" funktiosta
       const id = action.data.id
@@ -35,7 +36,11 @@ const reducer = (state = initialState, action) => {
       //Palautetaan uusi taulukon tila
       return state.map(anecdote =>
         anecdote.id !== id ? anecdote : votedAnecdote
+
       )
+    case 'NEW_ANECDOTE':
+      console.log('TULEEKO UUSI ANECDOTE', action.data)
+      return [...state, action.data]
     default:
       return state
   }
@@ -46,6 +51,20 @@ export const voteAnecdote = (id) => {
   return {
     type: 'VOTE',
     data: { id }
+  }
+}
+
+//Tällä Luodaan uusi anecdote ja importataan esim. "App.js" fileen, josta
+//tänne tuodaan anecdoten contentti
+export const createAnecdote = (content) => {
+  console.log('TULIKO CREATW ANECDOTEEN')
+  return {
+    type: 'NEW_ANECDOTE',
+    data: {
+      content,
+      id: getId(),
+      votes: 0
+    }
   }
 }
 

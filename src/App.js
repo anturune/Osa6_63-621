@@ -1,6 +1,6 @@
 import React from 'react'
 //Vote funktio on "anecdoteReducer.js" filessä
-import { voteAnecdote } from './reducers/anecdoteReducer'
+import { voteAnecdote, createAnecdote } from './reducers/anecdoteReducer'
 import { useSelector, useDispatch } from 'react-redux'
 
 const App = () => {
@@ -10,6 +10,15 @@ const App = () => {
   //Id syötetään "anecdoteReducer.js" filessä olevalle voteAnecdote funktiolle
   const vote = (id) => {
     dispatch(voteAnecdote(id))
+  }
+
+  const newAnecdote = (event) => {
+    event.preventDefault()
+    console.log('MITÄ INPUT KENTTÄÄN TULEE', event.target.newAnecdote.value)
+    const content = event.target.newAnecdote.value
+    event.target.newAnecdote.value = ''
+    console.log('MITÄ INPUT KENTTÄÄN TULEE', content)
+    dispatch(createAnecdote(content))
   }
 
   return (
@@ -27,9 +36,9 @@ const App = () => {
         </div>
       )}
       <h2>create new</h2>
-      <form>
-        <div><input /></div>
-        <button>create</button>
+      <form onSubmit={newAnecdote}>
+        <div><input name="newAnecdote" /></div>
+        <button type="submit">create</button>
       </form>
     </div>
   )
