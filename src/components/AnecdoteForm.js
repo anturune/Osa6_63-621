@@ -5,7 +5,7 @@ import { createAnecdote } from '../reducers/anecdoteReducer'
 
 //Uuden Anekdootin eristmäinen omaan komponenttiin ja exportattu muiden komponenttien/failien
 //käyttöön
-const AddAnecdote = () => {
+const AnecdoteForm = () => {
     const dispatch = useDispatch()
     const addNewAnecdote = (event) => {
         event.preventDefault()
@@ -26,4 +26,8 @@ const AddAnecdote = () => {
     )
 }
 
-export { AddAnecdote }
+export { AnecdoteForm }
+/*
+//Tämä default export ei toiminut 
+export default AddAnecdote
+*/
