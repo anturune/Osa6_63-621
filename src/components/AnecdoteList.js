@@ -33,9 +33,22 @@ const AnecdoteList = () => {
         }, 5000)
 
     }
-    //Tähän pitää laittaa "state.anecdotes", koska monta reduceria
-    const anecdotes = useSelector(state => state.anecdotes)
-    //console.log('ANEKDOOTIT ', anecdotes)
+    //Näytetään kaikki jos ei ole "filter" kenttään kirjoittetu mitään
+    //Otetaan filterin arvo talteen (voidaan myös laittaa suoraan if-lauseeseen) "state.filter.value"
+    //ja tällöin ei tarvita tätä apumuuttujaa. HUOM! muutetaan vielä arvo lower caseksi, niin ei ole case
+    //sensitive
+    const filter = useSelector(state => state.filter.value.toLocaleLowerCase())
+    const anecdotes = useSelector(state => {
+        if (filter === 'All') {
+            return state.anecdotes
+        }
+        //Filteröidään pois ne anecdootit, jotka eivät sisällä filter kentän arvoa
+        //HUOM! muutetaan lower caseksi anecdootit ettei ole case sensitive
+        return state.anecdotes.filter(anecdote => anecdote.content.toLocaleLowerCase().includes(filter))
+    })
+
+    //console.log('FILETERIN ARVO', filter)
+    //console.log('ANECDOTES', anecdotes)
     return (
         anecdotes.map(anecdote =>
             <Anecdote
@@ -47,6 +60,6 @@ const AnecdoteList = () => {
 
 export { AnecdoteList }
 /*
-//Tämä default export ei toiminut
+//Tämä default export ei toiminut--> toimii jos ei importata hakasuluilla "{}"
 export default AnecdoteList
 */
