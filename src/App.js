@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 //Vote funktio on "anecdoteReducer.js" filessä
 //import { voteAnecdote } from './reducers/anecdoteReducer'
 //import { useSelector, useDispatch } from 'react-redux'
@@ -7,6 +7,11 @@ import { AnecdoteList } from './components/AnecdoteList'
 import { Notification } from './components/Notification'
 import { Filter } from './components/AnecdoteFilter'
 
+//------------NÄMÄ TARVITAAN INITIAL TILAN LUOMISEKSI/db.json FILESTÄ DATAN HAKEMISEKSI ALKAA--------
+import anecdoteService from './services/anecdotes'
+import { initializeAnecdotes } from './reducers/anecdoteReducer'
+import { useDispatch } from 'react-redux'
+//------------NÄMÄ TARVITAAN INITIAL TILAN LUOMISEKSI/db.json FILESTÄ DATAN HAKEMISEKSI LOPPUU--------
 
 /*
 //---------------UUSI ANECDOTE UUDEKSI KOPMONENTIKSI SIIRRETTY FILEEN "src/components/NewAnecdote"-----
@@ -73,6 +78,14 @@ const App = () => {
       dispatch(createAnecdote(content))
     }
   */
+  const dispatch = useDispatch()
+  useEffect(() => {
+    anecdoteService
+      .getAll().then(anecdotes => dispatch(initializeAnecdotes(anecdotes)))
+      //Jos ei lisätä hakasulkeiden sisään "dispatch" tulee eslint herja
+      //toimisi ilman "dispatch" tekstiä myös vaikka herja jäisikin
+  }, [dispatch])
+
 
   return (
     <div>

@@ -1,5 +1,5 @@
 //Annetaan initial arvo notification objectille
-const initialState = { value: 'All' }
+const initialState = { value: '' }
 
 //Filterin tilankäsittelijä eli reducer
 

@@ -1,3 +1,5 @@
+
+/*
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -6,7 +8,10 @@ const anecdotesAtStart = [
   'Premature optimization is the root of all evil.',
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
-//
+*/
+
+const anecdotesAtStart = []
+
 const getId = () => (100000 * Math.random()).toFixed(0)
 
 //Tällä luodaan anecdootti olio, jossa id ja votet mukana
@@ -45,6 +50,10 @@ const anecdoteReducer = (state = initialState, action) => {
     case 'NEW_ANECDOTE':
       console.log('TULEEKO UUSI ANECDOTE', action.data)
       return [...state, action.data]
+    //Luodaan noteiden alustus, joka tulee alla olevasta actionista
+    //"initializeAnecdotes" ja aktivoidaan actioni "store.js" filestä
+    case 'INIT_ANECDOTES':
+      return action.data
     default:
       return state
   }
@@ -62,7 +71,7 @@ export const voteAnecdote = (id) => {
 //Tällä Luodaan uusi anecdote ja importataan esim. "App.js" fileen, josta
 //tänne tuodaan anecdoten contentti
 //Action on javascript objekti jolla on type -field.
-export const createAnecdote = (content) => {
+export const createAnecdote = ({ content }) => {
   console.log('TULIKO CREATW ANECDOTEEN')
   return {
     type: 'NEW_ANECDOTE',
@@ -71,6 +80,13 @@ export const createAnecdote = (content) => {
       id: getId(),
       votes: 0
     }
+  }
+}
+//Action anecdoottien alustamiselle, tätä ajetaan "stor.js" filestä
+export const initializeAnecdotes = (anecdotes) => {
+  return {
+    type: 'INIT_ANECDOTES',
+    data: anecdotes
   }
 }
 

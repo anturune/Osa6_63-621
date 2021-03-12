@@ -39,7 +39,7 @@ const AnecdoteList = () => {
     //sensitive
     const filter = useSelector(state => state.filter.value.toLocaleLowerCase())
     const anecdotes = useSelector(state => {
-        if (filter === 'All') {
+        if (filter === '') {
             return state.anecdotes
         }
         //Filteröidään pois ne anecdootit, jotka eivät sisällä filter kentän arvoa
