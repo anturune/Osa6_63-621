@@ -8,4 +8,12 @@ const getAll = async () => {
     return response.data
 }
 
-export default { getAll }
+//Funktio uuden anecdootin luomiseksi
+const createNewAnecdote = async (content) => {
+    //Anecdote objectille votes nolla, ei tarvitse ID:tä koska json server hoitaa sen
+    const anecdoteObject = { content, votes: 0 }
+    const response = await axios.post(baseUrl, anecdoteObject)
+    return response.data
+}
+
+export default { getAll, createNewAnecdote }

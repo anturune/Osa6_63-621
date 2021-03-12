@@ -77,7 +77,8 @@ export const createAnecdote = ({ content }) => {
     type: 'NEW_ANECDOTE',
     data: {
       content,
-      id: getId(),
+      //Tätä ei tarvita, kun käytetään json serveriä, server luo itse id:n
+      //id: getId(),
       votes: 0
     }
   }
