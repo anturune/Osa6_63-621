@@ -48,7 +48,7 @@ const AnecdoteList = () => {
     })
 
     //console.log('FILETERIN ARVO', filter)
-    //console.log('ANECDOTES', anecdotes)
+    console.log('ANECDOTESIT', anecdotes)
     return (
         anecdotes.map(anecdote =>
             <Anecdote

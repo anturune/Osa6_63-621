@@ -79,6 +79,7 @@ const App = () => {
     }
   */
   const dispatch = useDispatch()
+  
   useEffect(() => {
     dispatch(initializeAnecdotes())
     //Jos ei lisätä hakasulkeiden sisään "dispatch" tulee eslint herja

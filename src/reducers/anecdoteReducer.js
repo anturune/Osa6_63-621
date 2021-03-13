@@ -69,7 +69,7 @@ export const voteAnecdote = (id) => {
     data: { id }
   }
 }
-
+/*
 //Tällä Luodaan uusi anecdote ja importataan esim. "App.js" fileen, josta
 //tänne tuodaan anecdoten contentti
 //Action on javascript objekti jolla on type -field.
@@ -85,6 +85,7 @@ export const createAnecdote = ({ content }) => {
     }
   }
 }
+*/
 /*
 //Action anecdoottien alustamiselle, tätä ajetaan "stor.js" filestä
 export const initializeAnecdotes = (anecdotes) => {
@@ -94,6 +95,22 @@ export const initializeAnecdotes = (anecdotes) => {
   }
 }
 */
+
+//Redux-thunk: Tällä Luodaan uusi anecdote ja importataan esim. "App.js" fileen, josta
+//tänne tuodaan anecdoten contentti
+//Action on javascript objekti jolla on type -field.
+export const createAnecdote = content => {
+  console.log('TULIKO CREATW ANECDOTEEN', content)
+  return async dispatch => {
+    const newAnecdote = await anecdoteService.createNewAnecdote(content)
+    dispatch({
+      type: 'NEW_ANECDOTE',
+      data: newAnecdote,
+
+    })
+  }
+}
+
 //Redux-Thunk:lla tehtäessä sisemmässä funktiossaan, eli asynkronisessa actionissa operaatio hakee 
 //ensin palvelimelta kaikki muistiinpanot ja sen jälkeen dispatchaa muistiinpanot 
 //storeen lisäävän actionin.

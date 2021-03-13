@@ -17,10 +17,13 @@ const AnecdoteForm = () => {
         event.target.newAnecdote.value = ''
         //console.log('MITÄ INPUT KENTTÄÄN TULEE', content)
         //Tätä muutettu, kun luodaan anekdootti json serverille
-        const newAnecdote = await anecdoteService.createNewAnecdote(content)
-        dispatch(createAnecdote(newAnecdote))
+        //const newAnecdote = await anecdoteService.createNewAnecdote(content)
 
-        console.log('UUSI ANEKDOOTTI', newAnecdote)
+        //Redux thunk:lla kun tehdäään, niin tämä riittää.
+        //Eli menee "src/reducers/anecdoteReducer":in kautta "src/services/anecdote.js" fileen
+        dispatch(createAnecdote(content))
+
+        console.log('UUSI ANEKDOOTTI', content)
 
         //Luodaan Notificaatio anecdoten lisäämiseksi
         dispatch(createNewNotification(content))
