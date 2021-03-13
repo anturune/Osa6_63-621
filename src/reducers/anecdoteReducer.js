@@ -1,4 +1,6 @@
 
+//Tämä import tarvitaan, kun haetaan data json serveriltä
+import anecdoteService from '../services/anecdotes'
 /*
 const anecdotesAtStart = [
   'If it hurts, do it more often',
@@ -72,7 +74,7 @@ export const voteAnecdote = (id) => {
 //tänne tuodaan anecdoten contentti
 //Action on javascript objekti jolla on type -field.
 export const createAnecdote = ({ content }) => {
-  console.log('TULIKO CREATW ANECDOTEEN')
+  console.log('TULIKO CREATW ANECDOTEEN',content)
   return {
     type: 'NEW_ANECDOTE',
     data: {
@@ -83,6 +85,7 @@ export const createAnecdote = ({ content }) => {
     }
   }
 }
+/*
 //Action anecdoottien alustamiselle, tätä ajetaan "stor.js" filestä
 export const initializeAnecdotes = (anecdotes) => {
   return {
@@ -90,6 +93,18 @@ export const initializeAnecdotes = (anecdotes) => {
     data: anecdotes
   }
 }
-
+*/
+//Redux-Thunk:lla tehtäessä sisemmässä funktiossaan, eli asynkronisessa actionissa operaatio hakee 
+//ensin palvelimelta kaikki muistiinpanot ja sen jälkeen dispatchaa muistiinpanot 
+//storeen lisäävän actionin.
+export const initializeAnecdotes = () => {
+  return async dispatch => {
+    const anecdotes = await anecdoteService.getAll()
+    dispatch({
+      type: 'INIT_ANECDOTES',
+      data: anecdotes,
+    })
+  }
+}
 
 export default anecdoteReducer

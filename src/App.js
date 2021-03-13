@@ -80,10 +80,9 @@ const App = () => {
   */
   const dispatch = useDispatch()
   useEffect(() => {
-    anecdoteService
-      .getAll().then(anecdotes => dispatch(initializeAnecdotes(anecdotes)))
-      //Jos ei lisätä hakasulkeiden sisään "dispatch" tulee eslint herja
-      //toimisi ilman "dispatch" tekstiä myös vaikka herja jäisikin
+    dispatch(initializeAnecdotes())
+    //Jos ei lisätä hakasulkeiden sisään "dispatch" tulee eslint herja
+    //toimisi ilman "dispatch" tekstiä myös vaikka herja jäisikin
   }, [dispatch])
 
 

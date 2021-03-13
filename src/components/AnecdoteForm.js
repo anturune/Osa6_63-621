@@ -19,6 +19,9 @@ const AnecdoteForm = () => {
         //Tätä muutettu, kun luodaan anekdootti json serverille
         const newAnecdote = await anecdoteService.createNewAnecdote(content)
         dispatch(createAnecdote(newAnecdote))
+
+        console.log('UUSI ANEKDOOTTI', newAnecdote)
+
         //Luodaan Notificaatio anecdoten lisäämiseksi
         dispatch(createNewNotification(content))
         //Viiden sekunnin päästä poistetaan notificaatio
