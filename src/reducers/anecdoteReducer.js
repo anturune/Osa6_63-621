@@ -60,6 +60,8 @@ const anecdoteReducer = (state = initialState, action) => {
       return state
   }
 }
+
+/*
 //Tällä annetaan reducerille ID ja type, jolla määrätään mitä tehdään
 //Action on javascript objekti jolla on type -field.
 export const voteAnecdote = (id) => {
@@ -69,6 +71,7 @@ export const voteAnecdote = (id) => {
     data: { id }
   }
 }
+*/
 /*
 //Tällä Luodaan uusi anecdote ja importataan esim. "App.js" fileen, josta
 //tänne tuodaan anecdoten contentti
@@ -96,6 +99,30 @@ export const initializeAnecdotes = (anecdotes) => {
 }
 */
 
+//----------------NÄMÄ TOTEUTETTU REDUX THUNKILLA ALKAA----------------------------------
+//Tällä annetaan reducerille ID ja type, jolla määrätään mitä tehdään
+//Action on javascript objekti jolla on type -field.
+//Kun päivitetään objecti tietokantaan, niin annetaan uusi objecti ja ID
+//ja ajetaan "src/services/anecdotes.js" filessä put -komento, joka löytää
+//anecdoten ID:n perusteella ja korvaa vanhan objectin uudella
+//Anecdote ja id saadaan "src/Components/AnecdoteList.js" filestä ja 
+//"const AnecdoteList = () => {" funktiosta
+export const voteAnecdoteReduxThunk = (anecdote, id) => {
+  console.log('TULIKO VOTEEN')
+  return async dispatch => {
+    //Viedään "src/services/anecdotes.js" filessä put -komennolle sekä
+    //uusi anecdote obejkti, että vanhan/korvattavan objectin id
+    await anecdoteService.addNewVote({
+      content: anecdote.content,
+      votes: anecdote.votes + 1
+    }, anecdote.id)
+    dispatch({
+      type: 'VOTE',
+      data: { id }
+    })
+  }
+}
+
 //Redux-thunk: Tällä Luodaan uusi anecdote ja importataan esim. "App.js" fileen, josta
 //tänne tuodaan anecdoten contentti
 //Action on javascript objekti jolla on type -field.
@@ -106,7 +133,6 @@ export const createAnecdote = content => {
     dispatch({
       type: 'NEW_ANECDOTE',
       data: newAnecdote,
-
     })
   }
 }
@@ -123,5 +149,6 @@ export const initializeAnecdotes = () => {
     })
   }
 }
+//----------------NÄMÄ TOTEUTETTU REDUX THUNKILLA LOPPUU----------------------------------
 
 export default anecdoteReducer

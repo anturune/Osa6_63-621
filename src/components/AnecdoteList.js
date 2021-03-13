@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { voteAnecdote } from '../reducers/anecdoteReducer'
+import { voteAnecdoteReduxThunk } from '../reducers/anecdoteReducer'
 import { voteNotification, removeNotification } from '../reducers/notificationReducer'
 
 //Eristetään omaan komponenttiin yksittäisen Anecdootin näyttäminen sekä vote nappi
@@ -25,7 +25,11 @@ const AnecdoteList = () => {
     //sekä tyhjää notificaation 5sec jälkeen
     const addAnecdoteVote = (anecdote) => {
         //console.log('AECDOTE VOTEING ID', anecdote.id)
-        dispatch(voteAnecdote(anecdote.id))
+        //dispatch(voteAnecdote(anecdote.id))
+
+        //Näin voten lisäys kun käytetään redux thunkia
+        //Annetaan anecdote kokonaisuudessaan ja id "anecdoteReducerille"
+        dispatch(voteAnecdoteReduxThunk(anecdote, anecdote.id))
         dispatch(voteNotification(anecdote.content))
         //Viiden sekunnin päästä poistetaan notificaatio
         setTimeout(() => {

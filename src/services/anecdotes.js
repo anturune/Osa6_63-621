@@ -16,4 +16,13 @@ const createNewAnecdote = async (content) => {
     return response.data
 }
 
-export default { getAll, createNewAnecdote }
+
+//Funktio votettukselle
+const addNewVote = async (newAnecdoteObject, id) => {
+    //Anecdote objectin päivitys, etsitään ensin id:n perusteella kannasta ja päivitetään
+    //uudella objectilla
+    const response = await axios.put(`${baseUrl}/${id}`, newAnecdoteObject)
+    return response.data
+}
+
+export default { getAll, createNewAnecdote, addNewVote }
