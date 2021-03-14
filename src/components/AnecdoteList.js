@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { voteAnecdoteReduxThunk } from '../reducers/anecdoteReducer'
-import { voteNotification, removeNotification } from '../reducers/notificationReducer'
+import { createNewNotification, voteNotification, removeNotification } from '../reducers/notificationReducer'
 
 //Eristetään omaan komponenttiin yksittäisen Anecdootin näyttäminen sekä vote nappi
 const Anecdote = ({ anecdote, handleClick }) => {
@@ -30,12 +30,18 @@ const AnecdoteList = () => {
         //Näin voten lisäys kun käytetään redux thunkia
         //Annetaan anecdote kokonaisuudessaan ja id "anecdoteReducerille"
         dispatch(voteAnecdoteReduxThunk(anecdote, anecdote.id))
+
+        //------------NOTIFICATION AWAIT/ASYNC:lla----------------------------
+        dispatch(createNewNotification(`YOU VOTED: '${anecdote.content}'`, 10))
+
+        //------------NOTIFICATION AWAIT/ASYNC:lla----------------------------
+        /*
         dispatch(voteNotification(anecdote.content))
         //Viiden sekunnin päästä poistetaan notificaatio
         setTimeout(() => {
             dispatch(removeNotification())
         }, 5000)
-
+        */
     }
     //Näytetään kaikki jos ei ole "filter" kenttään kirjoittetu mitään
     //Otetaan filterin arvo talteen (voidaan myös laittaa suoraan if-lauseeseen) "state.filter.value"

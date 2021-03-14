@@ -24,13 +24,18 @@ const AnecdoteForm = () => {
         dispatch(createAnecdote(content))
 
         console.log('UUSI ANEKDOOTTI', content)
+        /*
+                //Luodaan Notificaatio anecdoten lisäämiseksi
+                dispatch(createNewNotification(content))
+                //Viiden sekunnin päästä poistetaan notificaatio
+                setTimeout(() => {
+                    dispatch(removeNotification())
+                }, 5000)
+                */
 
-        //Luodaan Notificaatio anecdoten lisäämiseksi
-        dispatch(createNewNotification(content))
-        //Viiden sekunnin päästä poistetaan notificaatio
-        setTimeout(() => {
-            dispatch(removeNotification())
-        }, 5000)
+        //-----NOTIFICAATIO AWAIT/ASYNC:lla ALKAA------
+        dispatch(createNewNotification(`YOU CREATED: '${content}'`, 10))
+        //-----NOTIFICAATIO AWAIT/ASYNC:lla LOPPUU------
     }
 
     return (
