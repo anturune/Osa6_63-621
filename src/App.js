@@ -2,12 +2,17 @@ import React, { useEffect } from 'react'
 //Vote funktio on "anecdoteReducer.js" filessä
 //import { voteAnecdote } from './reducers/anecdoteReducer'
 //import { useSelector, useDispatch } from 'react-redux'
-import { AnecdoteForm } from './components/AnecdoteForm'
+//import { AnecdoteForm } from './components/AnecdoteForm'
 import { AnecdoteList } from './components/AnecdoteList'
 //import { Notification } from './components/Notification'
-
-import ConnectedNotification from './components/Notification'
 import { Filter } from './components/AnecdoteFilter'
+
+//-----NÄMÄ KUN KÄYTETÄÄN useSelector ja useDispatch HOOKIEIDEN SIJAAN connect FUNKTIOITA ALKAA------
+import ConnectedNotification from './components/Notification'
+import ConnectedAnecdoteForm from './components/AnecdoteForm'
+import ConnectedFilter from './components/AnecdoteFilter'
+//-----NÄMÄ KUN KÄYTETÄÄN useSelector ja useDispatch HOOKIEIDEN SIJAAN connect FUNKTIOITA LOPPUU-----
+
 
 //------------NÄMÄ TARVITAAN INITIAL TILAN LUOMISEKSI/db.json FILESTÄ DATAN HAKEMISEKSI ALKAA--------
 import anecdoteService from './services/anecdotes'
@@ -108,12 +113,12 @@ const App = () => {
     <div>
       <ConnectedNotification />
       <h2>Filter anecdote</h2>
-      <Filter />
+      <ConnectedFilter />
       <br></br>
       <h2>Anecdotes</h2>
       <AnecdoteList />
       <h2>create new</h2>
-      <AnecdoteForm />
+      <ConnectedAnecdoteForm />
     </div>
   )
 }

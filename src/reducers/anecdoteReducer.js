@@ -55,7 +55,7 @@ const anecdoteReducer = (state = initialState, action) => {
     //Luodaan noteiden alustus, joka tulee alla olevasta actionista
     //"initializeAnecdotes" ja aktivoidaan actioni "store.js" filestä
     case 'INIT_ANECDOTES':
-      return action.data
+      return action.data.sort((a, b) => a.votes <= b.votes ? 1 : -1)
     default:
       return state
   }

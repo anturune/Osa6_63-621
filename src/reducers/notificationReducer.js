@@ -74,7 +74,7 @@ export const createNewNotification = (notification, howLong) => {
             dispatch({
                 type: 'REMOVE_NOTE'
             })
-        }, howLong * 1000)
+        }, howLong * 500)
 
     }
 }

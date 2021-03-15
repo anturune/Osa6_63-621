@@ -24,6 +24,7 @@ const store = createStore(
 )
 */
 //store on luotu tiedostossa store.js
+console.log('INDEX.JS', store)
 ReactDOM.render(
   <Provider store={store}>
     <App />
