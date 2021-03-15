@@ -61,21 +61,30 @@ export const voteNotification = (content) => {
 }
 */
 
+
 //------------ASYNC/AWAITILLA NOTIFICATION ALKAA-------------
+//Lisätään ns. globaali muuttuja, jolla voidaan pitää yllä edellisen vote-nappulan
+//painalluksen setTimeoutin ID:tä
+let handleSetTimeOutId = null
 export const createNewNotification = (notification, howLong) => {
     console.log('createNewNotification', notification)
     return async dispatch => {
+        console.log('TIMEOUT ID:n ARVO', handleSetTimeOutId)
         await dispatch({
             type: 'NEW_NOTIFICATION',
             data: { notification }
         })
-
-        setTimeout(() => {
-            dispatch({
-                type: 'REMOVE_NOTE'
-            })
-        }, howLong * 500)
-
+        //Ehtolause timeOutin clearaamiseen, kun painetaan useasti vote nappia 
+        if (handleSetTimeOutId !== null) {
+            console.log('KÄVIKÖ IFFISSÄ')
+            clearTimeout(handleSetTimeOutId)
+            handleSetTimeOutId = null
+        }
+        //Otetaan uusimman painalluksen timeout ID:n arvo talteen
+        handleSetTimeOutId = setTimeout(() => {
+            dispatch({ type: 'REMOVE_NOTE' })
+        }, howLong * 1000)
+        console.log('TIMEOUT ID:n ARVO', handleSetTimeOutId)
     }
 }
 

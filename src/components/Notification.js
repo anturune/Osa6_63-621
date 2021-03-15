@@ -52,7 +52,7 @@ const Notification = (props) => {
   //Ks. notificationReducder.js filestä 
   //const initialState = { value: 'INITIAL NOTIFICATION' }
   //siksi alla tarvitaan "notification.value"
-  console.log('MIKÄ ARVO NOTIFICAATIOLLA ', props.notification.value)
+  //console.log('MIKÄ ARVO NOTIFICAATIOLLA ', props.notification.value)
   //Jos on luotu uusi anecdote, notificaation tilan arvo ei ole null
   //ja viestin sisältö määräytyy "AnecdoteForm.js" ja "notificationReducder.js"
   //fileistä
