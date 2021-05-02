@@ -20,7 +20,7 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 )
 
-console.log('JSONISTA KAIKKI', anecdoteService.getAll())
+//console.log('MONGOSTA KAIKKI', anecdoteService.getAll())
 /*
 //Tällä alustetaan alkutila json serveriltä ja "db.json" filestä
 //HUOM! Alustus siirretty App.js fileen ja siellä käytetään effecHookia
